@@ -21,7 +21,7 @@ Config.Locale                     = 'en'
 
 Config.securitasStations = {
 
-	LSPD = {
+	securitas = {
 
 		Blip = {
 			Coords  = vector3(-1084.44, -256.87, 37.76),
