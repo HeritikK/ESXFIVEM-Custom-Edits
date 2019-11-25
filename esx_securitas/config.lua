@@ -113,7 +113,7 @@ Config.AuthorizedWeapons = {
 
 Config.AuthorizedVehicles = {
 	Shared = {
-	     { model = 'securitas1', label = 'Securitas', price = 5000 },0 }
+		{ model = 'securitas1', label = 'Securitas', price = 10000 },
 	},
 
 	recruit = {
@@ -139,28 +139,6 @@ Config.AuthorizedVehicles = {
 
 	boss = {
 
-	}
-}
-
-Config.AuthorizedHelicopters = {
-	recruit = {},
-
-	officer = {},
-
-	sergeant = {},
-
-	intendent = {},
-
-	lieutenant = {
-		{ model = 'polmav', label = 'Police Maverick', livery = 0, price = 200000 }
-	},
-
-	chef = {
-		{ model = 'polmav', label = 'Police Maverick', livery = 0, price = 150000 }
-	},
-
-	boss = {
-		{ model = 'polmav', label = 'Police Maverick', livery = 0, price = 100000 }
 	}
 }
 
