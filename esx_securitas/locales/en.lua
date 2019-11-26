@@ -2,7 +2,7 @@ Locales['en'] = {
   -- Cloakroom
   ['cloakroom'] = 'locker room',
   ['citizen_wear'] = 'civilian Outfit',
-  ['police_wear'] = 'police Outfit',
+  ['security_wear'] = 'Security Outfit',
   ['gilet_wear'] = 'orange reflective jacket',
   ['bullet_wear'] = 'bulletproof vest',
   ['no_outfit'] = 'there\'s no uniform that fits you!',
@@ -79,7 +79,7 @@ Locales['en'] = {
   ['license_revoked'] = 'your ~b~%s~s~ has been ~y~revoked~s~!',
   ['licence_you_revoked'] = 'you revoked a ~b~%s~s~ which belonged to ~y~%s~s~',
   ['no_players_nearby'] = 'there is no player(s) nearby!',
-  ['being_searched'] = 'you are being ~y~searched~s~ by the ~b~Police~s~',
+  ['being_searched'] = 'you are being ~y~searched~s~ by the ~b~security~s~',
   -- Vehicle interaction
   ['vehicle_info'] = 'vehicle Info',
   ['pick_lock'] = 'lockpick Vehicle',
@@ -143,12 +143,12 @@ Locales['en'] = {
   ['have_deposited'] = 'you have deposited ~y~%sx~s~ ~b~%s~s~',
   ['quantity'] = 'quantity',
   ['inventory'] = 'inventory',
-  ['police_stock'] = 'police Stock',
+  ['security_stock'] = 'Security Stock',
   -- Misc
   ['remove_prop'] = 'press ~INPUT_CONTEXT~ to delete the object',
-  ['map_blip'] = 'police Station',
+  ['map_blip'] = 'Security Station',
   ['unrestrained_timer'] = 'you feel your handcuffs slowly losing grip and fading away.',
   -- Notifications
-  ['alert_police'] = 'police alert',
-  ['phone_police'] = 'police',
+  ['alert_security'] = 'Security alert',
+  ['phone_security'] = 'Security',
 }
