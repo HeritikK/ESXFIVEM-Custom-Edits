@@ -1,8 +1,13 @@
 Locales['en'] = {
+  ['invoice_amount']                  = 'Enter the fine amount',
+  ['Bailbonds']                  = 'Bailbonds Issued Fine',
+  ['invoice_reason'] = 'Enter the fine Reason',
+  ['reason_invalid'] = 'Invalid Fine Reason',
+  ['amount_invalid'] = 'Invalid Fine amount',
   -- Cloakroom
   ['cloakroom'] = 'locker room',
   ['citizen_wear'] = 'civilian Outfit',
-  ['security_wear'] = 'Security Outfit',
+  ['Bailbonds_wear'] = 'Bailbonds Outfit',
   ['gilet_wear'] = 'orange reflective jacket',
   ['bullet_wear'] = 'bulletproof vest',
   ['no_outfit'] = 'there\'s no uniform that fits you!',
@@ -65,6 +70,7 @@ Locales['en'] = {
   ['citizen_interaction'] = 'citizen Interaction',
   ['vehicle_interaction'] = 'vehicle Interaction',
   ['object_spawner'] = 'object Spawner',
+  ['menu_revive'] = 'revive',   --add revive to menu
 
   ['id_card'] = 'ID Card',
   ['search'] = 'search',
@@ -79,7 +85,7 @@ Locales['en'] = {
   ['license_revoked'] = 'your ~b~%s~s~ has been ~y~revoked~s~!',
   ['licence_you_revoked'] = 'you revoked a ~b~%s~s~ which belonged to ~y~%s~s~',
   ['no_players_nearby'] = 'there is no player(s) nearby!',
-  ['being_searched'] = 'you are being ~y~searched~s~ by the ~b~security~s~',
+  ['being_searched'] = 'you are being ~y~searched~s~ by the ~b~Bailbonds~s~',
   -- Vehicle interaction
   ['vehicle_info'] = 'vehicle Info',
   ['pick_lock'] = 'lockpick Vehicle',
@@ -143,12 +149,15 @@ Locales['en'] = {
   ['have_deposited'] = 'you have deposited ~y~%sx~s~ ~b~%s~s~',
   ['quantity'] = 'quantity',
   ['inventory'] = 'inventory',
-  ['security_stock'] = 'Security Stock',
+  ['Bailbonds_stock'] = 'Bailbonds Stock',
+  --revive interaction
+  ['revive_complete'] = 'you have revived ~y~%s~s~',
+  ['revive_inprogress'] = 'a revive is in progress!',
   -- Misc
   ['remove_prop'] = 'press ~INPUT_CONTEXT~ to delete the object',
-  ['map_blip'] = 'Security Station',
+  ['map_blip'] = 'Bailbonds Station',
   ['unrestrained_timer'] = 'you feel your handcuffs slowly losing grip and fading away.',
   -- Notifications
-  ['alert_security'] = 'Security alert',
-  ['phone_security'] = 'Security',
+  ['alert_Bailbonds'] = 'Bailbonds alert',
+  ['phone_Bailbonds'] = 'Bailbonds',
 }

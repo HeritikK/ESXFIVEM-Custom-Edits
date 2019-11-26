@@ -9,14 +9,14 @@ end
 TriggerEvent('esx_phone:registerNumber', 'securitas', _U('alert_securitas'), true, true)
 TriggerEvent('esx_society:registerSociety', 'securitas', 'securitas', 'society_securitas', 'society_securitas', 'society_securitas', {type = 'public'})
 
-RegisterServerEvent('esx_securitasjob:confiscatePlayerItem')
-AddEventHandler('esx_securitasjob:confiscatePlayerItem', function(target, itemType, itemName, amount)
+RegisterServerEvent('esx_securitas:confiscatePlayerItem')
+AddEventHandler('esx_securitas:confiscatePlayerItem', function(target, itemType, itemName, amount)
 	local _source = source
 	local sourceXPlayer = ESX.GetPlayerFromId(_source)
 	local targetXPlayer = ESX.GetPlayerFromId(target)
 
 	if sourceXPlayer.job.name ~= 'securitas' then
-		print(('esx_securitasjob: %s attempted to confiscate!'):format(xPlayer.identifier))
+		print(('esx_securitas: %s attempted to confiscate!'):format(xPlayer.identifier))
 		return
 	end
 
@@ -26,7 +26,7 @@ AddEventHandler('esx_securitasjob:confiscatePlayerItem', function(target, itemTy
 
 		-- does the target player have enough in their inventory?
 		if targetItem.count > 0 and targetItem.count <= amount then
-
+		
 			-- can the player carry the said amount of x item?
 			if sourceItem.limit ~= -1 and (sourceItem.count + amount) > sourceItem.limit then
 				TriggerClientEvent('esx:showNotification', _source, _U('quantity_invalid'))
@@ -57,62 +57,63 @@ AddEventHandler('esx_securitasjob:confiscatePlayerItem', function(target, itemTy
 	end
 end)
 
-RegisterServerEvent('esx_securitasjob:handcuff')
-AddEventHandler('esx_securitasjob:handcuff', function(target)
+RegisterServerEvent('esx_securitas:handcuff')
+AddEventHandler('esx_securitas:handcuff', function(target)
 	local xPlayer = ESX.GetPlayerFromId(source)
 
 	if xPlayer.job.name == 'securitas' then
-		TriggerClientEvent('esx_securitasjob:handcuff', target)
+		TriggerClientEvent('esx_securitas:handcuff', target)
 	else
-		print(('esx_securitasjob: %s attempted to handcuff a player (not cop)!'):format(xPlayer.identifier))
+		print(('esx_securitas: %s attempted to handcuff a player (not a bounty hunter)!'):format(xPlayer.identifier))
 	end
 end)
 
-RegisterServerEvent('esx_securitasjob:drag')
-AddEventHandler('esx_securitasjob:drag', function(target)
+RegisterServerEvent('esx_securitas:drag')
+AddEventHandler('esx_securitas:drag', function(target)
 	local xPlayer = ESX.GetPlayerFromId(source)
 
 	if xPlayer.job.name == 'securitas' then
-		TriggerClientEvent('esx_securitasjob:drag', target, source)
+		TriggerClientEvent('esx_securitas:drag', target, source)
 	else
-		print(('esx_securitasjob: %s attempted to drag (not cop)!'):format(xPlayer.identifier))
+		print(('esx_securitas: %s attempted to drag (not not a bounty hunter)!'):format(xPlayer.identifier))
 	end
 end)
 
-RegisterServerEvent('esx_securitasjob:putInVehicle')
-AddEventHandler('esx_securitasjob:putInVehicle', function(target)
+RegisterServerEvent('esx_securitas:putInVehicle')
+AddEventHandler('esx_securitas:putInVehicle', function(target)
 	local xPlayer = ESX.GetPlayerFromId(source)
 
 	if xPlayer.job.name == 'securitas' then
-		TriggerClientEvent('esx_securitasjob:putInVehicle', target)
+		TriggerClientEvent('esx_securitas:putInVehicle', target)
 	else
-		print(('esx_securitasjob: %s attempted to put in vehicle (not cop)!'):format(xPlayer.identifier))
+		print(('esx_securitas: %s attempted to put in vehicle (not not a bounty hunter)!'):format(xPlayer.identifier))
 	end
 end)
 
-RegisterServerEvent('esx_securitasjob:OutVehicle')
-AddEventHandler('esx_securitasjob:OutVehicle', function(target)
+RegisterServerEvent('esx_securitas:OutVehicle')
+AddEventHandler('esx_securitas:OutVehicle', function(target)
 	local xPlayer = ESX.GetPlayerFromId(source)
 
 	if xPlayer.job.name == 'securitas' then
-		TriggerClientEvent('esx_securitasjob:OutVehicle', target)
+		TriggerClientEvent('esx_securitas:OutVehicle', target)
 	else
-		print(('esx_securitasjob: %s attempted to drag out from vehicle (not cop)!'):format(xPlayer.identifier))
+		print(('esx_securitas: %s attempted to drag out from vehicle (not not a bounty hunter)!'):format(xPlayer.identifier))
 	end
 end)
 
-RegisterServerEvent('esx_securitasjob:getStockItem')
-AddEventHandler('esx_securitasjob:getStockItem', function(itemName, count)
+RegisterServerEvent('esx_securitas:getStockItem')
+AddEventHandler('esx_securitas:getStockItem', function(itemName, count)
 	local _source = source
 	local xPlayer = ESX.GetPlayerFromId(_source)
 	local sourceItem = xPlayer.getInventoryItem(itemName)
 
 	TriggerEvent('esx_addoninventory:getSharedInventory', 'society_securitas', function(inventory)
+
 		local inventoryItem = inventory.getItem(itemName)
 
 		-- is there enough in the society?
 		if count > 0 and inventoryItem.count >= count then
-
+		
 			-- can the player carry the said amount of x item?
 			if sourceItem.limit ~= -1 and (sourceItem.count + count) > sourceItem.limit then
 				TriggerClientEvent('esx:showNotification', _source, _U('quantity_invalid'))
@@ -125,14 +126,16 @@ AddEventHandler('esx_securitasjob:getStockItem', function(itemName, count)
 			TriggerClientEvent('esx:showNotification', _source, _U('quantity_invalid'))
 		end
 	end)
+
 end)
 
-RegisterServerEvent('esx_securitasjob:putStockItems')
-AddEventHandler('esx_securitasjob:putStockItems', function(itemName, count)
+RegisterServerEvent('esx_securitas:putStockItems')
+AddEventHandler('esx_securitas:putStockItems', function(itemName, count)
 	local xPlayer = ESX.GetPlayerFromId(source)
 	local sourceItem = xPlayer.getInventoryItem(itemName)
 
 	TriggerEvent('esx_addoninventory:getSharedInventory', 'society_securitas', function(inventory)
+
 		local inventoryItem = inventory.getItem(itemName)
 
 		-- does the player have enough of the item?
@@ -143,12 +146,17 @@ AddEventHandler('esx_securitasjob:putStockItems', function(itemName, count)
 		else
 			TriggerClientEvent('esx:showNotification', xPlayer.source, _U('quantity_invalid'))
 		end
+
 	end)
+
 end)
 
-ESX.RegisterServerCallback('esx_securitasjob:getOtherPlayerData', function(source, cb, target)
+ESX.RegisterServerCallback('esx_securitas:getOtherPlayerData', function(source, cb, target)
+
 	if Config.EnableESXIdentity then
+
 		local xPlayer = ESX.GetPlayerFromId(target)
+
 		local result = MySQL.Sync.fetchAll('SELECT firstname, lastname, sex, dateofbirth, height FROM users WHERE identifier = @identifier', {
 			['@identifier'] = xPlayer.identifier
 		})
@@ -186,7 +194,9 @@ ESX.RegisterServerCallback('esx_securitasjob:getOtherPlayerData', function(sourc
 		else
 			cb(data)
 		end
+
 	else
+
 		local xPlayer = ESX.GetPlayerFromId(target)
 
 		local data = {
@@ -198,7 +208,7 @@ ESX.RegisterServerCallback('esx_securitasjob:getOtherPlayerData', function(sourc
 		}
 
 		TriggerEvent('esx_status:getStatus', target, 'drunk', function(status)
-			if status then
+			if status ~= nil then
 				data.drunk = math.floor(status.percent)
 			end
 		end)
@@ -208,10 +218,12 @@ ESX.RegisterServerCallback('esx_securitasjob:getOtherPlayerData', function(sourc
 		end)
 
 		cb(data)
+
 	end
+
 end)
 
-ESX.RegisterServerCallback('esx_securitasjob:getFineList', function(source, cb, category)
+ESX.RegisterServerCallback('esx_securitas:getFineList', function(source, cb, category)
 	MySQL.Async.fetchAll('SELECT * FROM fine_types WHERE category = @category', {
 		['@category'] = category
 	}, function(fines)
@@ -219,7 +231,7 @@ ESX.RegisterServerCallback('esx_securitasjob:getFineList', function(source, cb, 
 	end)
 end)
 
-ESX.RegisterServerCallback('esx_securitasjob:getVehicleInfos', function(source, cb, plate)
+ESX.RegisterServerCallback('esx_securitas:getVehicleInfos', function(source, cb, plate)
 
 	MySQL.Async.fetchAll('SELECT owner FROM owned_vehicles WHERE plate = @plate', {
 		['@plate'] = plate
@@ -230,6 +242,7 @@ ESX.RegisterServerCallback('esx_securitasjob:getVehicleInfos', function(source, 
 		}
 
 		if result[1] then
+
 			MySQL.Async.fetchAll('SELECT name, firstname, lastname FROM users WHERE identifier = @identifier',  {
 				['@identifier'] = result[1].owner
 			}, function(result2)
@@ -248,7 +261,7 @@ ESX.RegisterServerCallback('esx_securitasjob:getVehicleInfos', function(source, 
 	end)
 end)
 
-ESX.RegisterServerCallback('esx_securitasjob:getVehicleFromPlate', function(source, cb, plate)
+ESX.RegisterServerCallback('esx_securitas:getVehicleFromPlate', function(source, cb, plate)
 	MySQL.Async.fetchAll('SELECT owner FROM owned_vehicles WHERE plate = @plate', {
 		['@plate'] = plate
 	}, function(result)
@@ -271,7 +284,8 @@ ESX.RegisterServerCallback('esx_securitasjob:getVehicleFromPlate', function(sour
 	end)
 end)
 
-ESX.RegisterServerCallback('esx_securitasjob:getArmoryWeapons', function(source, cb)
+ESX.RegisterServerCallback('esx_securitas:getArmoryWeapons', function(source, cb)
+
 	TriggerEvent('esx_datastore:getSharedDataStore', 'society_securitas', function(store)
 		local weapons = store.get('weapons')
 
@@ -281,9 +295,11 @@ ESX.RegisterServerCallback('esx_securitasjob:getArmoryWeapons', function(source,
 
 		cb(weapons)
 	end)
+
 end)
 
-ESX.RegisterServerCallback('esx_securitasjob:addArmoryWeapon', function(source, cb, weaponName, removeWeapon)
+ESX.RegisterServerCallback('esx_securitas:addArmoryWeapon', function(source, cb, weaponName, removeWeapon)
+
 	local xPlayer = ESX.GetPlayerFromId(source)
 
 	if removeWeapon then
@@ -291,6 +307,7 @@ ESX.RegisterServerCallback('esx_securitasjob:addArmoryWeapon', function(source, 
 	end
 
 	TriggerEvent('esx_datastore:getSharedDataStore', 'society_securitas', function(store)
+
 		local weapons = store.get('weapons')
 
 		if weapons == nil then
@@ -317,10 +334,13 @@ ESX.RegisterServerCallback('esx_securitasjob:addArmoryWeapon', function(source, 
 		store.set('weapons', weapons)
 		cb()
 	end)
+
 end)
 
-ESX.RegisterServerCallback('esx_securitasjob:removeArmoryWeapon', function(source, cb, weaponName)
+ESX.RegisterServerCallback('esx_securitas:removeArmoryWeapon', function(source, cb, weaponName)
+
 	local xPlayer = ESX.GetPlayerFromId(source)
+
 	xPlayer.addWeapon(weaponName, 500)
 
 	TriggerEvent('esx_datastore:getSharedDataStore', 'society_securitas', function(store)
@@ -351,9 +371,10 @@ ESX.RegisterServerCallback('esx_securitasjob:removeArmoryWeapon', function(sourc
 		store.set('weapons', weapons)
 		cb()
 	end)
+
 end)
 
-ESX.RegisterServerCallback('esx_securitasjob:buyWeapon', function(source, cb, weaponName, type, componentNum)
+ESX.RegisterServerCallback('esx_securitas:buyWeapon', function(source, cb, weaponName, type, componentNum)
 	local xPlayer = ESX.GetPlayerFromId(source)
 	local authorizedWeapons, selectedWeapon = Config.AuthorizedWeapons[xPlayer.job.grade_name]
 
@@ -365,74 +386,74 @@ ESX.RegisterServerCallback('esx_securitasjob:buyWeapon', function(source, cb, we
 	end
 
 	if not selectedWeapon then
-		print(('esx_securitasjob: %s attempted to buy an invalid weapon.'):format(xPlayer.identifier))
+		print(('esx_securitas: %s attempted to buy an invalid weapon.'):format(xPlayer.identifier))
 		cb(false)
-	else
-		-- Weapon
-		if type == 1 then
-			if xPlayer.getMoney() >= selectedWeapon.price then
-				xPlayer.removeMoney(selectedWeapon.price)
-				xPlayer.addWeapon(weaponName, 100)
-
-				cb(true)
-			else
-				cb(false)
-			end
-
-		-- Weapon Component
-		elseif type == 2 then
-			local price = selectedWeapon.components[componentNum]
-			local weaponNum, weapon = ESX.GetWeapon(weaponName)
-
-			local component = weapon.components[componentNum]
-
-			if component then
-				if xPlayer.getMoney() >= price then
-					xPlayer.removeMoney(price)
-					xPlayer.addWeaponComponent(weaponName, component.name)
-
-					cb(true)
-				else
-					cb(false)
-				end
-			else
-				print(('esx_securitasjob: %s attempted to buy an invalid weapon component.'):format(xPlayer.identifier))
-				cb(false)
-			end
-		end
 	end
-end)
 
+	-- Weapon
+	if type == 1 then
+		if xPlayer.getMoney() >= selectedWeapon.price then
+			xPlayer.removeMoney(selectedWeapon.price)
+			xPlayer.addWeapon(weaponName, 100)
 
-ESX.RegisterServerCallback('esx_securitasjob:buyJobVehicle', function(source, cb, vehicleProps, type)
-	local xPlayer = ESX.GetPlayerFromId(source)
-	local price = getPriceFromHash(vehicleProps.model, xPlayer.job.grade_name, type)
-
-	-- vehicle model not found
-	if price == 0 then
-		print(('esx_securitasjob: %s attempted to exploit the shop! (invalid vehicle model)'):format(xPlayer.identifier))
-		cb(false)
-	else
-		if xPlayer.getMoney() >= price then
-			xPlayer.removeMoney(price)
-
-			MySQL.Async.execute('INSERT INTO owned_vehicles (owner, vehicle, plate, type, job, `stored`) VALUES (@owner, @vehicle, @plate, @type, @job, @stored)', {
-				['@owner'] = xPlayer.identifier,
-				['@vehicle'] = json.encode(vehicleProps),
-				['@plate'] = vehicleProps.plate,
-				['@type'] = type,
-				['@job'] = xPlayer.job.name,
-				['@stored'] = true
-			}, function (rowsChanged)
-				cb(true)
-			end)
+			cb(true)
 		else
+			cb(false)
+		end
+
+	-- Weapon Component
+	elseif type == 2 then
+		local price = selectedWeapon.components[componentNum]
+		local weaponNum, weapon = ESX.GetWeapon(weaponName)
+
+		local component = weapon.components[componentNum]
+
+		if component then
+			if xPlayer.getMoney() >= price then
+				xPlayer.removeMoney(price)
+				xPlayer.addWeaponComponent(weaponName, component.name)
+
+				cb(true)
+			else
+				cb(false)
+			end
+		else
+			print(('esx_securitas: %s attempted to buy an invalid weapon component.'):format(xPlayer.identifier))
 			cb(false)
 		end
 	end
 end)
 
-ESX.RegisterServerCallback('esx_securitasjob:storeNearbyVehicle', function(source, cb, nearbyVehicles)
+
+ESX.RegisterServerCallback('esx_securitas:buyJobVehicle', function(source, cb, vehicleProps, type)
+	local xPlayer = ESX.GetPlayerFromId(source)
+	local price = getPriceFromHash(vehicleProps.model, xPlayer.job.grade_name, type)
+
+	-- vehicle model not found
+	if price == 0 then
+		print(('esx_securitas: %s attempted to exploit the shop! (invalid vehicle model)'):format(xPlayer.identifier))
+		cb(false)
+	end
+
+	if xPlayer.getMoney() >= price then
+		xPlayer.removeMoney(price)
+
+		MySQL.Async.execute('INSERT INTO owned_vehicles (owner, vehicle, plate, type, job, `stored`) VALUES (@owner, @vehicle, @plate, @type, @job, @stored)', {
+			['@owner'] = xPlayer.identifier,
+			['@vehicle'] = json.encode(vehicleProps),
+			['@plate'] = vehicleProps.plate,
+			['@type'] = type,
+			['@job'] = xPlayer.job.name,
+			['@stored'] = true
+		}, function (rowsChanged)
+			cb(true)
+		end)
+	else
+		cb(false)
+	end
+end)
+
+ESX.RegisterServerCallback('esx_securitas:storeNearbyVehicle', function(source, cb, nearbyVehicles)
 	local xPlayer = ESX.GetPlayerFromId(source)
 	local foundPlate, foundNum
 
@@ -458,7 +479,7 @@ ESX.RegisterServerCallback('esx_securitasjob:storeNearbyVehicle', function(sourc
 			['@job'] = xPlayer.job.name
 		}, function (rowsChanged)
 			if rowsChanged == 0 then
-				print(('esx_securitasjob: %s has exploited the garage!'):format(xPlayer.identifier))
+				print(('esx_securitas: %s has exploited the garage!'):format(xPlayer.identifier))
 				cb(false)
 			else
 				cb(true, foundNum)
@@ -469,8 +490,8 @@ ESX.RegisterServerCallback('esx_securitasjob:storeNearbyVehicle', function(sourc
 end)
 
 function getPriceFromHash(hashKey, jobGrade, type)
-	if type == 'helicopter' then
-		local vehicles = Config.AuthorizedHelicopters[jobGrade]
+	if type == 'Helicopter' then
+		local vehicles = Config.AuthorizedHelicopter[jobGrade]
 
 		for k,v in ipairs(vehicles) do
 			if GetHashKey(v.model) == hashKey then
@@ -497,13 +518,13 @@ function getPriceFromHash(hashKey, jobGrade, type)
 	return 0
 end
 
-ESX.RegisterServerCallback('esx_securitasjob:getStockItems', function(source, cb)
+ESX.RegisterServerCallback('esx_securitas:getStockItems', function(source, cb)
 	TriggerEvent('esx_addoninventory:getSharedInventory', 'society_securitas', function(inventory)
 		cb(inventory.items)
 	end)
 end)
 
-ESX.RegisterServerCallback('esx_securitasjob:getPlayerInventory', function(source, cb)
+ESX.RegisterServerCallback('esx_securitas:getPlayerInventory', function(source, cb)
 	local xPlayer = ESX.GetPlayerFromId(source)
 	local items   = xPlayer.inventory
 
@@ -513,39 +534,39 @@ end)
 AddEventHandler('playerDropped', function()
 	-- Save the source in case we lose it (which happens a lot)
 	local _source = source
-
+	
 	-- Did the player ever join?
 	if _source ~= nil then
 		local xPlayer = ESX.GetPlayerFromId(_source)
-
+		
 		-- Is it worth telling all clients to refresh?
 		if xPlayer ~= nil and xPlayer.job ~= nil and xPlayer.job.name == 'securitas' then
 			Citizen.Wait(5000)
-			TriggerClientEvent('esx_securitasjob:updateBlip', -1)
+			TriggerClientEvent('esx_securitas:updateBlip', -1)
 		end
-	end
+	end	
 end)
 
-RegisterServerEvent('esx_securitasjob:spawned')
-AddEventHandler('esx_securitasjob:spawned', function()
+RegisterServerEvent('esx_securitas:spawned')
+AddEventHandler('esx_securitas:spawned', function()
 	local _source = source
 	local xPlayer = ESX.GetPlayerFromId(_source)
-
+	
 	if xPlayer ~= nil and xPlayer.job ~= nil and xPlayer.job.name == 'securitas' then
 		Citizen.Wait(5000)
-		TriggerClientEvent('esx_securitasjob:updateBlip', -1)
+		TriggerClientEvent('esx_securitas:updateBlip', -1)
 	end
 end)
 
-RegisterServerEvent('esx_securitasjob:forceBlip')
-AddEventHandler('esx_securitasjob:forceBlip', function()
-	TriggerClientEvent('esx_securitasjob:updateBlip', -1)
+RegisterServerEvent('esx_securitas:forceBlip')
+AddEventHandler('esx_securitas:forceBlip', function()
+	TriggerClientEvent('esx_securitas:updateBlip', -1)
 end)
 
 AddEventHandler('onResourceStart', function(resource)
 	if resource == GetCurrentResourceName() then
 		Citizen.Wait(5000)
-		TriggerClientEvent('esx_securitasjob:updateBlip', -1)
+		TriggerClientEvent('esx_securitas:updateBlip', -1)
 	end
 end)
 
@@ -555,7 +576,40 @@ AddEventHandler('onResourceStop', function(resource)
 	end
 end)
 
-RegisterServerEvent('esx_securitasjob:message')
-AddEventHandler('esx_securitasjob:message', function(target, msg)
+RegisterServerEvent('esx_securitas:message')
+AddEventHandler('esx_securitas:message', function(target, msg)
 	TriggerClientEvent('esx:showNotification', target, msg)
+end)
+
+RegisterServerEvent('getday')
+AddEventHandler('getday', function() 
+	local date_table = os.date("*t")
+	local year, month, day = date_table.year, date_table.month, date_table.wday
+	local result = string.format("%d-%d-%d", day, month, year)
+
+	local date = tostring(result)
+	print('Date from server side: ' .. date)
+return day
+end)
+
+RegisterServerEvent('getmonth')
+AddEventHandler('getdaymonth', function() 
+	local date_table = os.date("*t")
+	local year, month, day = date_table.year, date_table.month, date_table.wday
+	local result = string.format("%d-%d-%d", day, month, year)
+
+	local date = tostring(result)
+	print('Date from server side: ' .. date)
+return month
+end)
+
+RegisterServerEvent('getyear')
+AddEventHandler('getyear', function() 
+	local date_table = os.date("*t")
+	local year, month, day = date_table.year, date_table.month, date_table.wday
+	local result = string.format("%d-%d-%d", day, month, year)
+
+	local date = tostring(result)
+	print('Date from server side: ' .. date)
+return year
 end)
