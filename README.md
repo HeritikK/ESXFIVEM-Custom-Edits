@@ -5,6 +5,7 @@
 
 # [Current WIP]
 **esx_securitas**
+**policeinteractscript**
 
 # [Planned]
 **esx_policejob**
