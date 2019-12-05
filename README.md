@@ -3,6 +3,9 @@
 **Note this is a work in progress not all have been tested 100%**
 
 ## [Finished]
+**esx_policejob**
+
+**esx_firejob (for esx_policejob)**
 
 ## [Current WIP]
 **esx_securitas**
@@ -12,7 +15,6 @@
 **K9 Script**
 
 ## [Planned]
-**esx_policejob**
 
 # Credits
 
