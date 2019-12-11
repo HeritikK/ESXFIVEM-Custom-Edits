@@ -8,7 +8,6 @@
 **esx_firejob (for esx_policejob)**
 
 ## [Current WIP]
-**esx_securitas**
 
 **policeinteractionscript**
 
